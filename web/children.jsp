@@ -40,9 +40,15 @@
     </thead>
     <tbody>
     <%
-        int parentId = ParentDAO.getParentId(DBHelper.getConnection(), request.getParameter("status"), request.getParameter("first_name")
-                , request.getParameter("last_name"), request.getParameter("email"), request.getParameter("address"), request.getParameter("phone"));
-        System.out.println(parentId);
+        int parentId;
+
+        if (session.getAttribute("parentId") == null)
+            parentId = ParentDAO.getParentId(DBHelper.getConnection(), request.getParameter("status"), request.getParameter("first_name")
+                    , request.getParameter("last_name"), request.getParameter("email"), request.getParameter("address"), request.getParameter("phone"));
+        else parentId = (int) session.getAttribute("parentId");
+
+        session.setAttribute("parentId", parentId);
+
         List<Child> children = ChildDAO.getChildren(DBHelper.getConnection(), parentId);
         request.setAttribute("children", children);
         request.setAttribute("parentId", parentId);

@@ -3,6 +3,7 @@ package com.crechepro.dao;
 import com.crechepro.bean.Child;
 import com.crechepro.bean.Contract;
 import com.crechepro.bean.Parent;
+import com.crechepro.utils.PDFUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,64 +13,74 @@ import java.util.List;
 
 public class ContractDAO {
 
-    public static int createContract(Connection connection, int childId) {
+    static void createContract(Connection connection, int childId) {
         int status = 0;
         try {
             PreparedStatement ps = connection.prepareStatement(
                     "insert into contract(childId) values(?)");
             ps.setInt(1, childId);
             status = ps.executeUpdate();
+
+            PDFUtils.createDocument();
+
         } catch (Exception e) {
             System.out.println(e);
         }
-        return status;
     }
 
-    public static int deleteContract(Connection connection, int id) {
-        int status = 0;
+    public static void deleteContract(Connection connection, int id) {
         try {
+            System.out.println(id);
             PreparedStatement ps_child = connection.prepareStatement("select id, parentId from child where id = (select childId from contract where id=?)");
             ps_child.setInt(1, id);
-            ResultSet res = ps_child.executeQuery();
+            ResultSet res_child = ps_child.executeQuery();
 
-            while(res.next()){
+            while (res_child.next()) {
+                int child_id = res_child.getInt("id");
+                int parent_id = res_child.getInt("parentId");
 
+                System.out.println("deleting Child");
                 //Deleting the Child
                 PreparedStatement ps_delete_child = connection.prepareStatement("delete from child where id=?");
-                ps_delete_child.setInt(1, res.getInt("id"));
+                ps_delete_child.setInt(1, child_id);
                 ps_delete_child.executeUpdate();
 
                 //Searching if Parent Has another Child
+                System.out.println("Searching Parent");
                 PreparedStatement ps_parent = connection.prepareStatement("select parentId from child where parentId=? ");
-                ps_parent.setInt(1, id);
+                ps_parent.setInt(1, parent_id);
                 ResultSet res_parent = ps_parent.executeQuery();
 
                 //Parent for only one Child
-                if (!res_parent.next()){
+                if (!res_parent.next()) {
+                    System.out.println("No Other children, Delete Parent");
                     //Deleting the Parent
                     PreparedStatement ps_delete_parent = connection.prepareStatement("delete from parent where id=?");
-                    ps_delete_parent.setInt(1, res.getInt("parentId"));
+                    ps_delete_parent.setInt(1, parent_id);
                     ps_delete_parent.executeUpdate();
                 }
-
             }
-
+            System.out.println("Delete Contract");
             PreparedStatement ps = connection.prepareStatement("delete from contract where id=?");
             ps.setInt(1, id);
-            status = ps.executeUpdate();
+            ps.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
         }
 
-        return status;
     }
 
-    public static List<Contract> getContracts(Connection connection) {
+    public static List<Contract> getContracts(Connection connection, boolean asc, boolean disabled) {
         List<Contract> list = new ArrayList<Contract>();
 
         try {
-
-            PreparedStatement ps = connection.prepareStatement("select * from contract");
+            PreparedStatement ps;
+            if (disabled)
+                ps = connection.prepareStatement("select * from contract where disabled = false");
+            else if (asc)
+                ps = connection.prepareStatement("select * from contract order by start_date ASC");
+            else
+                ps = connection.prepareStatement("select * from contract order by start_date DESC");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Contract c = new Contract();

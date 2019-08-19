@@ -1,6 +1,3 @@
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="com.crechepro.bean.Contract" %>
-<%@ page import="com.crechepro.dao.ContractDAO,java.util.*,com.crechepro.utils.DBHelper" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -19,9 +16,9 @@
                     Filter
                 </button>
                 <div class="dropdown-menu dropdown-menu-lg-right">
-                    <button class="dropdown-item" type="button">Action</button>
-                    <button class="dropdown-item" type="button">Another action</button>
-                    <button class="dropdown-item" type="button">Something else here</button>
+                    <button class="dropdown-item" type="button" onclick="filterDisabled()">Disabled Contracts</button>
+                    <button class="dropdown-item" type="button" onclick="filterASC()">Sort Contracts (ASC)</button>
+                    <button class="dropdown-item" type="button" onclick="filterDESC()">Sort Contracts (DESC)</button>
                 </div>
             </div>
         </div>
@@ -31,43 +28,9 @@
     </div>
 </div>
 <br/>
-<table class="table table-hover">
-    <thead>
-    <tr>
-        <th></th>
-        <th scope="col">#</th>
-        <th scope="col">First Name</th>
-        <th scope="col">Last Name</th>
-        <th scope="col">Date Start</th>
-        <th scope="col">Date End</th>
-        <th scope="col">Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <%
-        List<Contract> contracts = ContractDAO.getContracts(DBHelper.getConnection());
-        request.setAttribute("contracts", contracts);
-    %>
-    <c:forEach items="${contracts}" var="c">
-        <tr>
-            <td></td>
-            <th scope="row">${c.getId()}</th>
-            <td>${c.getChild().getFirst_name()}</td>
-            <td>${c.getChild().getLast_name()}</td>
-            <td>${c.getBegin_date()}</td>
-            <td>${c.getEnd_date()}</td>
-            <td>
-                <input class="view btn btn-dark" type="submit" value="View">
-                <form action="deleteContract.jsp" method="get">
-                    <input class="delete btn btn-danger" type="submit" value="Delete">
-                    <input type="hidden" name="id" value="${c.id}">
-                </form>
-            </td>
-        </tr>
-    </c:forEach>
-    </tbody>
-</table>
-
+<div class="contracts">
+    <jsp:include page="descContracts.jsp"/>
+</div>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
@@ -118,5 +81,22 @@
         </div>
     </div>
 </div>
+
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script>
+    function filterDisabled() {
+        $(".contracts").load("disabledContracts.jsp");
+    }
+
+    function filterASC() {
+        $(".contracts").load("ascContracts.jsp");
+
+    }
+
+    function filterDESC() {
+        $(".contracts").load("descContracts.jsp");
+
+    }
+</script>
 </body>
 </html>
