@@ -21,7 +21,7 @@ public class ContractDAO {
             ps.setInt(1, childId);
             status = ps.executeUpdate();
 
-            PDFUtils.createDocument();
+            //PDFUtils.createDocument();
 
         } catch (Exception e) {
             System.out.println(e);

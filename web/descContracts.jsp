@@ -3,6 +3,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.crechepro.dao.ContractDAO" %>
 <%@ page import="com.crechepro.utils.DBHelper" %>
+<%@ page import="com.crechepro.utils.PDFUtils" %>
 <table class="table table-hover">
     <thead>
     <tr>
@@ -17,6 +18,8 @@
     </thead>
     <tbody>
     <%
+        PDFUtils.createDocument();
+
         List<Contract> contracts = ContractDAO.getContracts(DBHelper.getConnection(), false, false);
         request.setAttribute("contracts", contracts);
     %>
