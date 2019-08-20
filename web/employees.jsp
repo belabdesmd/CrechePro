@@ -5,5 +5,6 @@
 </head>
 <body>
 <jsp:include page="navbar.html"/>
+<% session.removeAttribute("parent"); %>
 </body>
 </html>

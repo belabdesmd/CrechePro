@@ -29,7 +29,10 @@
             <td>${c.getBegin_date()}</td>
             <td>${c.getEnd_date()}</td>
             <td>
-                <input class="view btn btn-dark" type="submit" value="View">
+                <form action="viewContract.jsp" method="get">
+                    <input class="view btn btn-dark" type="submit" value="View">
+                    <input type="hidden" name="contractId" value="${c.getChild().getId()}">
+                </form>
                 <form action="deleteContract.jsp" method="get">
                     <input class="delete btn btn-danger" type="submit" value="Delete">
                     <input type="hidden" name="id" value="${c.id}">

@@ -6,6 +6,7 @@
 </head>
 <body>
 <jsp:include page="navbar.html"/>
+<% session.removeAttribute("parent"); %>
 <br/>
 <div class="container-fluid">
     <div class="row">

@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class ParentDAO {
 
-    public static int getParentId(Connection connection, String status, String first_name, String last_name, String email, String address, String phone) {
+    public static int getParentId(Connection connection, String status, String first_name, String last_name, String email, String address, int phone) {
 
         Parent parent = new Parent();
         parent.setStatus(status);
@@ -17,13 +17,7 @@ public class ParentDAO {
         parent.setLast_name(last_name);
         parent.setEmail(email);
         parent.setAddress(address);
-
-
-        try {
-            parent.setPhone(Integer.parseInt(phone));
-        } catch (NumberFormatException e) {
-            //Ignore
-        }
+        parent.setPhone(phone);
 
         if (!parentExist(connection, parent))
             createParent(connection, parent);

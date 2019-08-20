@@ -9,19 +9,33 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ContractDAO {
 
-    static void createContract(Connection connection, int childId) {
+    static void createContract(Connection connection, Child child) {
         int status = 0;
         try {
             PreparedStatement ps = connection.prepareStatement(
                     "insert into contract(childId) values(?)");
-            ps.setInt(1, childId);
+            ps.setInt(1, child.getId());
             status = ps.executeUpdate();
 
-            //PDFUtils.createDocument();
+            PreparedStatement ps1 = connection.prepareStatement(
+                    "select * from contract where childId=?");
+            ps1.setInt(1, child.getId());
+            ResultSet rs = ps1.executeQuery();
+
+
+            Contract contract = new Contract();
+            while(rs.next()){
+                contract.setBegin_date(rs.getDate("start_date").toString());
+                contract.setEnd_date(rs.getDate("end_date").toString());
+                contract.setChild(child);
+            }
+
+            PDFUtils.createDocument(contract);
 
         } catch (Exception e) {
             System.out.println(e);

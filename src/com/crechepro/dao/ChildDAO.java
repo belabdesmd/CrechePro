@@ -2,6 +2,7 @@ package com.crechepro.dao;
 
 
 import com.crechepro.bean.Child;
+import com.crechepro.bean.Parent;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -36,7 +37,7 @@ public class ChildDAO {
         return list;
     }
 
-    public static void createChild(Connection connection, String first_name, String last_name, String gender, String date, int parentId) {
+    public static void createChild(Connection connection, String first_name, String last_name, String gender, String date, Parent parent) {
         try {
             PreparedStatement ps = connection.prepareStatement(
                     "insert into child(first_name, last_name, gender, birthday, parentId) values(?,?,?,?,?)");
@@ -44,7 +45,7 @@ public class ChildDAO {
             ps.setString(2, last_name);
             ps.setString(3, gender);
             ps.setString(4, date);
-            ps.setInt(5, parentId);
+            ps.setInt(5, parent.getId());
             int status = ps.executeUpdate();
 
             try {
@@ -54,12 +55,21 @@ public class ChildDAO {
                 ps1.setString(2, last_name);
                 ps1.setString(3, gender);
                 ps1.setString(4, date);
-                ps1.setInt(5, parentId);
+                ps1.setInt(5, parent.getId());
 
                 ResultSet rs1 = ps1.executeQuery();
 
-                while (rs1.next())
-                    ContractDAO.createContract(connection, rs1.getInt("id"));
+                Child child = new Child();
+                child.setFirst_name(first_name);
+                child.setLast_name(last_name);
+                child.setGender(gender);
+                child.setBirthday(date);
+                child.setParent(parent);
+
+                while (rs1.next()) {
+                    child.setId(rs1.getInt("id"));
+                    ContractDAO.createContract(connection, child);
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }

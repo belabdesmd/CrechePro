@@ -3,6 +3,7 @@
 <%@ page import="com.crechepro.bean.Child" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.crechepro.dao.ChildDAO" %>
+<%@ page import="com.crechepro.bean.Parent" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -40,18 +41,33 @@
     </thead>
     <tbody>
     <%
-        int parentId;
 
-        if (session.getAttribute("parentId") == null)
-            parentId = ParentDAO.getParentId(DBHelper.getConnection(), request.getParameter("status"), request.getParameter("first_name")
-                    , request.getParameter("last_name"), request.getParameter("email"), request.getParameter("address"), request.getParameter("phone"));
-        else parentId = (int) session.getAttribute("parentId");
+        Parent parent;
 
-        session.setAttribute("parentId", parentId);
 
-        List<Child> children = ChildDAO.getChildren(DBHelper.getConnection(), parentId);
+        if (session.getAttribute("parent") == null) {
+            System.out.println();
+            parent = new Parent();
+            parent.setStatus(request.getParameter("status"));
+            parent.setFirst_name(request.getParameter("first_name"));
+            parent.setLast_name(request.getParameter("last_name"));
+            parent.setEmail(request.getParameter("email"));
+            try {
+                parent.setPhone(Integer.valueOf(request.getParameter("phone")));
+            } catch (NumberFormatException e) {
+                //Ignore
+            }
+            parent.setAddress(request.getParameter("address"));
+            parent.setId(ParentDAO.getParentId(DBHelper.getConnection(), parent.getStatus(), parent.getFirst_name()
+                    , parent.getLast_name(), parent.getEmail(), parent.getAddress(), parent.getPhone()));
+        }
+        else parent = ((Parent) session.getAttribute("parent"));
+
+        session.setAttribute("parent", parent);
+
+        List<Child> children = ChildDAO.getChildren(DBHelper.getConnection(), parent.getId());
         request.setAttribute("children", children);
-        request.setAttribute("parentId", parentId);
+        request.setAttribute("parentId", parent.getId());
     %>
     <c:forEach items="${children}" var="c">
         <tr>
