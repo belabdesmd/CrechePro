@@ -21,22 +21,22 @@
         List<Contract> contracts = ContractDAO.getContracts(DBHelper.getConnection(), false, false);
         request.setAttribute("contracts", contracts);
     %>
-    <c:forEach items="${contracts}" var="c">
+    <c:forEach items="${contracts}" var="e">
         <tr>
             <td></td>
-            <th scope="row">${c.getId()}</th>
-            <td>${c.getChild().getFirst_name()}</td>
-            <td>${c.getChild().getLast_name()}</td>
-            <td>${c.getBegin_date()}</td>
-            <td>${c.getEnd_date()}</td>
+            <th scope="row">${e.getId()}</th>
+            <td>${e.getChild().getFirst_name()}</td>
+            <td>${e.getChild().getLast_name()}</td>
+            <td>${e.getBegin_date()}</td>
+            <td>${e.getEnd_date()}</td>
             <td>
                 <form action="viewContract.jsp" method="get">
                     <input class="view btn btn-dark" type="submit" value="View">
-                    <input type="hidden" name="contractId" value="${c.getChild().getId()}">
+                    <input type="hidden" name="contractId" value="${e.getChild().getId()}">
                 </form>
                 <form action="deleteContract.jsp" method="get">
                     <input class="delete btn btn-danger" type="submit" value="Delete">
-                    <input type="hidden" name="id" value="${c.id}">
+                    <input type="hidden" name="id" value="${e.id}">
                 </form>
             </td>
         </tr>

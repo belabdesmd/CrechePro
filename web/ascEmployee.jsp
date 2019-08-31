@@ -1,8 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="com.crechepro.bean.Contract" %>
-<%@ page import="java.util.List" %>
-<%@ page import="com.crechepro.dao.ContractDAO" %>
 <%@ page import="com.crechepro.utils.DBHelper" %>
+<%@ page import="com.crechepro.bean.Employee" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.crechepro.dao.EmployeeDAO" %>
 <table class="table table-hover">
     <thead>
     <tr>
@@ -17,10 +17,10 @@
     </thead>
     <tbody>
     <%
-        List<Contract> contracts = ContractDAO.getContracts(DBHelper.getConnection(), false, true);
-        request.setAttribute("contracts", contracts);
+        List<Employee> employees = EmployeeDAO.getEmployees(DBHelper.getConnection(), true);
+        request.setAttribute("employees", employees);
     %>
-    <c:forEach items="${contracts}" var="e">
+    <c:forEach items="${employees}" var="e">
         <tr>
             <td></td>
             <th scope="row">${e.getId()}</th>

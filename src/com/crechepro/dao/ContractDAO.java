@@ -90,7 +90,7 @@ public class ContractDAO {
         try {
             PreparedStatement ps;
             if (disabled)
-                ps = connection.prepareStatement("select * from contract where disabled = false");
+                ps = connection.prepareStatement("select * from contract where disabled = true");
             else if (asc)
                 ps = connection.prepareStatement("select * from contract order by start_date ASC");
             else

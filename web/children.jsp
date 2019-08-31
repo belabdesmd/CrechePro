@@ -69,14 +69,14 @@
         request.setAttribute("children", children);
         request.setAttribute("parentId", parent.getId());
     %>
-    <c:forEach items="${children}" var="c">
+    <c:forEach items="${children}" var="e">
         <tr>
             <td></td>
-            <th scope="row">${c.getId()}</th>
-            <td>${c.getFirst_name()}</td>
-            <td>${c.getLast_name()}</td>
-            <td>${c.getGender()}</td>
-            <td>${c.getBirthday()}</td>
+            <th scope="row">${e.getId()}</th>
+            <td>${e.getFirst_name()}</td>
+            <td>${e.getLast_name()}</td>
+            <td>${e.getGender()}</td>
+            <td>${e.getBirthday()}</td>
             <td></td>
         </tr>
     </c:forEach>

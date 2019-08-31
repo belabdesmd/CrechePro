@@ -17,7 +17,7 @@ import java.util.Date;
 
 public class PDFUtils {
 
-    private static String FILE =  "/contracts/";
+    private static String FILE = "A:/Abdessamed/STUDY/mini PROJECT/CrechePro/web/contracts/";
     private static String pdfPath;
 
     private static Font titleFont = new Font(Font.FontFamily.UNDEFINED, 18,
