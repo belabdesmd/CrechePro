@@ -44,7 +44,6 @@ public class ContractDAO {
 
     public static void deleteContract(Connection connection, int id) {
         try {
-            System.out.println(id);
             PreparedStatement ps_child = connection.prepareStatement("select id, parentId from child where id = (select childId from contract where id=?)");
             ps_child.setInt(1, id);
             ResultSet res_child = ps_child.executeQuery();

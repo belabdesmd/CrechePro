@@ -33,7 +33,7 @@
             <td>
                 <form action="viewEmployee.jsp" method="get">
                     <input class="view btn btn-dark" type="submit" value="View">
-                    <input type="hidden" name="contractId" value="${e.id}">
+                    <input type="hidden" name="employeeId" value="${e.id}">
                 </form>
                 <form action="deleteEmployee.jsp" method="get">
                     <input class="delete btn btn-danger" type="submit" value="Delete">

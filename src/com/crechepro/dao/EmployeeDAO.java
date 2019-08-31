@@ -59,4 +59,13 @@ public class EmployeeDAO {
         return list;
     }
 
+    public static void deleteEmployee(Connection connection, int id) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("delete from employee where id=?");
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
