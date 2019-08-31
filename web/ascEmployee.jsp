@@ -10,8 +10,9 @@
         <th scope="col">#</th>
         <th scope="col">First Name</th>
         <th scope="col">Last Name</th>
-        <th scope="col">Date Start</th>
-        <th scope="col">Date End</th>
+        <th scope="col">Birthday</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
         <th scope="col">Actions</th>
     </tr>
     </thead>
@@ -23,17 +24,18 @@
     <c:forEach items="${employees}" var="e">
         <tr>
             <td></td>
-            <th scope="row">${e.getId()}</th>
-            <td>${e.getChild().getFirst_name()}</td>
-            <td>${e.getChild().getLast_name()}</td>
-            <td>${e.getBegin_date()}</td>
-            <td>${e.getEnd_date()}</td>
+            <th scope="row">${e.id}</th>
+            <td>${e.first_name}</td>
+            <td>${e.last_name}</td>
+            <td>${e.birthday}</td>
+            <td>${e.email}</td>
+            <td>${e.phone}</td>
             <td>
-                <form action="viewContract.jsp" method="get">
+                <form action="viewEmployee.jsp" method="get">
                     <input class="view btn btn-dark" type="submit" value="View">
-                    <input type="hidden" name="contractId" value="${e.getChild().getId()}">
+                    <input type="hidden" name="contractId" value="${e.id}">
                 </form>
-                <form action="deleteContract.jsp" method="get">
+                <form action="deleteEmployee.jsp" method="get">
                     <input class="delete btn btn-danger" type="submit" value="Delete">
                     <input type="hidden" name="id" value="${e.id}">
                 </form>

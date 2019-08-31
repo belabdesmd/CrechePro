@@ -5,6 +5,9 @@
 <%@ page import="java.util.Iterator" %>
 <%@ page import="org.apache.commons.fileupload.FileItem" %>
 <%@ page import="java.io.File" %>
+<%@ page import="com.crechepro.bean.Employee" %>
+<%@ page import="com.crechepro.dao.EmployeeDAO" %>
+<%@ page import="com.crechepro.utils.DBHelper" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
@@ -16,8 +19,10 @@
     // Verify the content type
     String contentType = request.getContentType();
 
-    if ((contentType.indexOf("multipart/form-data") >= 0)) {
+    if ((contentType.contains("multipart/form-data"))) {
+
         DiskFileItemFactory factory = new DiskFileItemFactory();
+
         // maximum size that will be stored in memory
         factory.setSizeThreshold(maxMemSize);
 
@@ -35,20 +40,14 @@
             List fileItems = upload.parseRequest(request);
 
             // Process the uploaded file items
-            Iterator i = fileItems.iterator();
+            Employee employee = new Employee();
 
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>JSP File upload</title>");
-            out.println("</head>");
-            out.println("<body>");
+            for (Object fileItem : fileItems) {
+                FileItem fi = (FileItem) fileItem;
 
-            while (i.hasNext()) {
-                FileItem fi = (FileItem) i.next();
                 if (!fi.isFormField()) {
                     // Get the uploaded file parameters
-                    String fieldName = fi.getFieldName();
-                    String fileName = fi.getName();
+                    String fileName = employee.getFirst_name() + "_" + employee.getLast_name() + ".jpeg";
                     boolean isInMemory = fi.isInMemory();
                     long sizeInBytes = fi.getSize();
 
@@ -61,23 +60,43 @@
                                 fileName.substring(fileName.lastIndexOf("\\") + 1));
                     }
                     fi.write(file);
-                    out.println("Uploaded Filename: " + filePath +
-                            fileName + "<br>");
+                } else {
+                    switch (fi.getFieldName()) {
+                        case "first_name":
+                            employee.setFirst_name(fi.getString());
+                            break;
+                        case "last_name":
+                            employee.setLast_name(fi.getString());
+                            break;
+                        case "gender":
+                            employee.setGender(fi.getString());
+                            break;
+                        case "birthday":
+                            employee.setBirthday(fi.getString());
+                            break;
+                        case "email":
+                            employee.setEmail(fi.getString());
+                            break;
+                        case "address":
+                            employee.setAddress(fi.getString());
+                            break;
+                        case "phone":
+                            try {
+                                employee.setPhone(Integer.valueOf(fi.getString()));
+                            } catch (NumberFormatException e) {
+                                //Ignore
+                            }
+                            break;
+                    }
                 }
             }
-            out.println("</body>");
-            out.println("</html>");
+
+            EmployeeDAO.createEmployee(DBHelper.getConnection(), employee);
+
+            response.sendRedirect("employees.jsp");
+
         } catch (Exception ex) {
             System.out.println(ex);
         }
-    } else {
-        out.println("<html>");
-        out.println("<head>");
-        out.println("<title>Servlet upload</title>");
-        out.println("</head>");
-        out.println("<body>");
-        out.println("<p>No file uploaded</p>");
-        out.println("</body>");
-        out.println("</html>");
     }
 %>

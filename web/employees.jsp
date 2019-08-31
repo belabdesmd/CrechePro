@@ -46,10 +46,6 @@
             <form action="createEmployee.jsp" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="profile_picture">Profile Picture</label>
-                        <input type="file" class="form-control" id="profile_picture" name="profile_picture">
-                    </div>
-                    <div class="form-group">
                         <label for="first_name">First Name</label>
                         <input type="text" class="form-control" id="first_name" name="first_name">
                     </div>
@@ -58,8 +54,12 @@
                         <input type="text" class="form-control" id="last_name" name="last_name">
                     </div>
                     <div class="form-group">
-                        <label for="status">Gender</label>
-                        <select class="form-control" id="status" name="status">
+                        <label for="profile_picture">Profile Picture</label>
+                        <input type="file" class="form-control" id="profile_picture" name="profile_picture">
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select class="form-control" id="gender" name="gender">
                             <option>Male</option>
                             <option>Female</option>
                         </select>
@@ -83,7 +83,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <input type="submit" class="btn btn-primary" value="Add Children"/>
+                        <input type="submit" class="btn btn-primary" value="Add Employee"/>
                     </div>
                 </div>
             </form>

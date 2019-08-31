@@ -72,11 +72,11 @@
     <c:forEach items="${children}" var="e">
         <tr>
             <td></td>
-            <th scope="row">${e.getId()}</th>
-            <td>${e.getFirst_name()}</td>
-            <td>${e.getLast_name()}</td>
-            <td>${e.getGender()}</td>
-            <td>${e.getBirthday()}</td>
+            <th scope="row">${e.id}</th>
+            <td>${e.first_name}</td>
+            <td>${e.last_name}</td>
+            <td>${e.gender}</td>
+            <td>${e.birthday}</td>
             <td></td>
         </tr>
     </c:forEach>
