@@ -6,49 +6,44 @@ public class Planning {
     private int id;
     private String start_date;
     private String end_date;
-    private ArrayList<Activity> sunday = new ArrayList<>();
-    private ArrayList<Activity> monday = new ArrayList<>();
-    private ArrayList<Activity> tuesday = new ArrayList<>();
-    private ArrayList<Activity> wednesday = new ArrayList<>();
-    private ArrayList<Activity> thursday = new ArrayList<>();
-    private ArrayList<Activity> friday = new ArrayList<>();
-    private ArrayList<Activity> saturday = new ArrayList<>();
+
+    private ArrayList<Activity> activities_8_10 = new ArrayList<>();
+    private ArrayList<Activity> activities_10_12 = new ArrayList<>();
+    private ArrayList<Activity> activities_12_14 = new ArrayList<>();
+    private ArrayList<Activity> activities_14_16 = new ArrayList<>();
 
     public Planning() {
-        sunday.add(null);
-        sunday.add(null);
-        sunday.add(null);
-        sunday.add(null);
+        activities_8_10.add(null);
+        activities_8_10.add(null);
+        activities_8_10.add(null);
+        activities_8_10.add(null);
+        activities_8_10.add(null);
+        activities_8_10.add(null);
+        activities_8_10.add(null);
 
-        monday.add(null);
-        monday.add(null);
-        monday.add(null);
-        monday.add(null);
+        activities_10_12.add(null);
+        activities_10_12.add(null);
+        activities_10_12.add(null);
+        activities_10_12.add(null);
+        activities_10_12.add(null);
+        activities_10_12.add(null);
+        activities_10_12.add(null);
 
-        tuesday.add(null);
-        tuesday.add(null);
-        tuesday.add(null);
-        tuesday.add(null);
+        activities_12_14.add(null);
+        activities_12_14.add(null);
+        activities_12_14.add(null);
+        activities_12_14.add(null);
+        activities_12_14.add(null);
+        activities_12_14.add(null);
+        activities_12_14.add(null);
 
-        wednesday.add(null);
-        wednesday.add(null);
-        wednesday.add(null);
-        wednesday.add(null);
-
-        thursday.add(null);
-        thursday.add(null);
-        thursday.add(null);
-        thursday.add(null);
-
-        friday.add(null);
-        friday.add(null);
-        friday.add(null);
-        friday.add(null);
-
-        saturday.add(null);
-        saturday.add(null);
-        saturday.add(null);
-        saturday.add(null);
+        activities_14_16.add(null);
+        activities_14_16.add(null);
+        activities_14_16.add(null);
+        activities_14_16.add(null);
+        activities_14_16.add(null);
+        activities_14_16.add(null);
+        activities_14_16.add(null);
     }
 
     public int getId() {
@@ -75,59 +70,35 @@ public class Planning {
         this.end_date = end_date;
     }
 
-    public void setSundayActivities(Activity activity, int position) {
-        sunday.set(position, activity);
+    public void setActivities_8_10(Activity activity, int position) {
+        activities_8_10.set(position, activity);
     }
 
-    public void setMondayActivities(Activity activity, int position) {
-        monday.set(position, activity);
+    public void setActivities_10_12(Activity activity, int position) {
+        activities_10_12.set(position, activity);
     }
 
-    public void setTuesdayActivities(Activity activity, int position) {
-        tuesday.set(position, activity);
+    public void setActivities_12_14(Activity activity, int position) {
+        activities_12_14.set(position, activity);
     }
 
-    public void setWednesdayActivities(Activity activity, int position) {
-        wednesday.set(position, activity);
+    public void setActivities_14_16(Activity activity, int position) {
+        activities_14_16.set(position, activity);
     }
 
-    public void setThursdayActivities(Activity activity, int position) {
-        thursday.set(position, activity);
+    public ArrayList<Activity> getActivities_8_10() {
+        return activities_8_10;
     }
 
-    public void setFridayActivities(Activity activity, int position) {
-        friday.set(position, activity);
+    public ArrayList<Activity> getActivities_10_12() {
+        return activities_10_12;
     }
 
-    public void setSaturdayActivities(Activity activity, int position) {
-        saturday.set(position, activity);
+    public ArrayList<Activity> getActivities_12_14() {
+        return activities_12_14;
     }
 
-    public ArrayList<Activity> getSunday() {
-        return sunday;
-    }
-
-    public ArrayList<Activity> getMonday() {
-        return monday;
-    }
-
-    public ArrayList<Activity> getTuesday() {
-        return tuesday;
-    }
-
-    public ArrayList<Activity> getWednesday() {
-        return wednesday;
-    }
-
-    public ArrayList<Activity> getThursday() {
-        return thursday;
-    }
-
-    public ArrayList<Activity> getFriday() {
-        return friday;
-    }
-
-    public ArrayList<Activity> getSaturday() {
-        return saturday;
+    public ArrayList<Activity> getActivities_14_16() {
+        return activities_14_16;
     }
 }

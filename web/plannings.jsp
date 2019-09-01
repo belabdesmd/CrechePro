@@ -40,9 +40,12 @@
 <br/>
 <%
     String start_date, end_date;
+
+    //Get Current Date
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     Date date = new Date();
 
+    //Get Date Filters
     if (request.getParameter("start_date") != null)
         start_date = request.getParameter("start_date");
     else start_date = dateFormat.format(date);
@@ -52,14 +55,14 @@
     else end_date = dateFormat.format(date);
 
 
+    //Get Planning
     Planning planning = PlanningDAO.getPlanning(DBHelper.getConnection(), start_date, end_date);
-    request.setAttribute("saturday", planning.getSaturday());
-    request.setAttribute("sunday", planning.getSunday());
-    request.setAttribute("monday", planning.getMonday());
-    request.setAttribute("tuesday", planning.getTuesday());
-    request.setAttribute("wednesday", planning.getWednesday());
-    request.setAttribute("thursday", planning.getThursday());
-    request.setAttribute("friday", planning.getFriday());
+
+    //Set Activities
+    request.setAttribute("a_8_10", planning.getActivities_8_10());
+    request.setAttribute("a_10_12", planning.getActivities_10_12());
+    request.setAttribute("a_12_14", planning.getActivities_12_14());
+    request.setAttribute("a_14_16", planning.getActivities_14_16());
 %>
 <table class="table table-dark">
     <thead>
@@ -77,239 +80,55 @@
     <tbody>
     <tr>
         <th scope="row" class="bg-success">08:00 - 10:00</th>
-        <c:choose>
-            <c:when test="${sunday.get(0) != null}">
-                <td style="background: ${sunday.get(0).color};">${sunday.get(0).name}</td>
-            </c:when>
-            <c:otherwise>
-                <td class="bg-danger"></td>
-            </c:otherwise>
-        </c:choose>
-        <c:choose>
-            <c:when test="${monday.get(0) != null}">
-                <td style="background: ${monday.get(0).color};">${monday.get(0).name}</td>
-            </c:when>
-            <c:otherwise>
-                <td class="bg-danger"></td>
-            </c:otherwise>
-        </c:choose>
-        <c:choose>
-            <c:when test="${tuesday.get(0) != null}">
-                <td style="background: ${tuesday.get(0).color};">${tuesday.get(0).name}</td>
-            </c:when>
-            <c:otherwise>
-                <td class="bg-danger"></td>
-            </c:otherwise>
-        </c:choose>
-        <c:choose>
-            <c:when test="${wednesday.get(0) != null}">
-                <td style="background: ${wednesday.get(0).color};">${wednesday.get(0).name}</td>
-            </c:when>
-            <c:otherwise>
-                <td class="bg-danger"></td>
-            </c:otherwise>
-        </c:choose>
-        <c:choose>
-            <c:when test="${thursday.get(0) != null}">
-                <td style="background: ${thursday.get(0).color};">${thursday.get(0).name}</td>
-            </c:when>
-            <c:otherwise>
-                <td class="bg-danger"></td>
-            </c:otherwise>
-        </c:choose>
-        <c:choose>
-            <c:when test="${friday.get(0) != null}">
-                <td style="background: ${friday.get(0).color};">${friday.get(0).name}</td>
-            </c:when>
-            <c:otherwise>
-                <td class="bg-danger"></td>
-            </c:otherwise>
-        </c:choose>
-        <c:choose>
-            <c:when test="${saturday.get(0) != null}">
-                <td style="background: ${saturday.get(0).color};">${saturday.get(0).name}</td>
-            </c:when>
-            <c:otherwise>
-                <td class="bg-danger"></td>
-            </c:otherwise>
-        </c:choose>
+        <c:forEach items="${a_8_10}" var="a">
+            <c:choose>
+                <c:when test="${a != null}">
+                    <td style="background: ${a.color};">${a.name}</td>
+                </c:when>
+                <c:otherwise>
+                    <td class="bg-danger"></td>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
     </tr>
     <tr>
         <th scope="row" class="bg-success">10:00 - 12:00</th>
-        <c:choose>
-            <c:when test="${sunday.get(1) != null}">
-                <td style="background: ${sunday.get(1).color};">${sunday.get(1).name}</td>
-            </c:when>
-            <c:otherwise>
-                <td class="bg-danger"></td>
-            </c:otherwise>
-        </c:choose>
-        <c:choose>
-            <c:when test="${monday.get(1) != null}">
-                <td style="background: ${monday.get(1).color};">${monday.get(1).name}</td>
-            </c:when>
-            <c:otherwise>
-                <td class="bg-danger"></td>
-            </c:otherwise>
-        </c:choose>
-        <c:choose>
-            <c:when test="${tuesday.get(1) != null}">
-                <td style="background: ${tuesday.get(1).color};">${tuesday.get(1).name}</td>
-            </c:when>
-            <c:otherwise>
-                <td class="bg-danger"></td>
-            </c:otherwise>
-        </c:choose>
-        <c:choose>
-            <c:when test="${wednesday.get(1) != null}">
-                <td style="background: ${wednesday.get(1).color};">${wednesday.get(1).name}</td>
-            </c:when>
-            <c:otherwise>
-                <td class="bg-danger"></td>
-            </c:otherwise>
-        </c:choose>
-        <c:choose>
-            <c:when test="${thursday.get(1) != null}">
-                <td style="background: ${thursday.get(1).color};">${thursday.get(1).name}</td>
-            </c:when>
-            <c:otherwise>
-                <td class="bg-danger"></td>
-            </c:otherwise>
-        </c:choose>
-        <c:choose>
-            <c:when test="${friday.get(1) != null}">
-                <td style="background: ${friday.get(1).color};">${friday.get(1).name}</td>
-            </c:when>
-            <c:otherwise>
-                <td class="bg-danger"></td>
-            </c:otherwise>
-        </c:choose>
-        <c:choose>
-            <c:when test="${saturday.get(1) != null}">
-                <td style="background: ${saturday.get(1).color};">${saturday.get(1).name}</td>
-            </c:when>
-            <c:otherwise>
-                <td class="bg-danger"></td>
-            </c:otherwise>
-        </c:choose>
+        <c:forEach items="${a_10_12}" var="a">
+            <c:choose>
+                <c:when test="${a != null}">
+                    <td style="background: ${a.color};">${a.name}</td>
+                </c:when>
+                <c:otherwise>
+                    <td class="bg-danger"></td>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
     </tr>
     <tr>
         <th scope="row" class="bg-success">12:00 - 14:00</th>
-        <c:choose>
-            <c:when test="${sunday.get(2) != null}">
-                <td style="background: ${sunday.get(2).color};">${sunday.get(2).name}</td>
-            </c:when>
-            <c:otherwise>
-                <td class="bg-danger"></td>
-            </c:otherwise>
-        </c:choose>
-        <c:choose>
-            <c:when test="${monday.get(2) != null}">
-                <td style="background: ${monday.get(2).color};">${monday.get(2).name}</td>
-            </c:when>
-            <c:otherwise>
-                <td class="bg-danger"></td>
-            </c:otherwise>
-        </c:choose>
-        <c:choose>
-            <c:when test="${tuesday.get(2) != null}">
-                <td style="background: ${tuesday.get(2).color};">${tuesday.get(2).name}</td>
-            </c:when>
-            <c:otherwise>
-                <td class="bg-danger"></td>
-            </c:otherwise>
-        </c:choose>
-        <c:choose>
-            <c:when test="${wednesday.get(2) != null}">
-                <td style="background: ${wednesday.get(2).color};">${wednesday.get(2).name}</td>
-            </c:when>
-            <c:otherwise>
-                <td class="bg-danger"></td>
-            </c:otherwise>
-        </c:choose>
-        <c:choose>
-            <c:when test="${thursday.get(2) != null}">
-                <td style="background: ${thursday.get(2).color};">${thursday.get(2).name}</td>
-            </c:when>
-            <c:otherwise>
-                <td class="bg-danger"></td>
-            </c:otherwise>
-        </c:choose>
-        <c:choose>
-            <c:when test="${friday.get(2) != null}">
-                <td style="background: ${friday.get(2).color};">${friday.get(2).name}</td>
-            </c:when>
-            <c:otherwise>
-                <td class="bg-danger"></td>
-            </c:otherwise>
-        </c:choose>
-        <c:choose>
-            <c:when test="${saturday.get(2) != null}">
-                <td style="background: ${saturday.get(2).color};">${saturday.get(2).name}</td>
-            </c:when>
-            <c:otherwise>
-                <td class="bg-danger"></td>
-            </c:otherwise>
-        </c:choose>
+        <c:forEach items="${a_12_14}" var="a">
+            <c:choose>
+                <c:when test="${a != null}">
+                    <td style="background: ${a.color};">${a.name}</td>
+                </c:when>
+                <c:otherwise>
+                    <td class="bg-danger"></td>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
     </tr>
     <tr>
         <th scope="row" class="bg-success">14:00 - 16:00</th>
-        <c:choose>
-            <c:when test="${sunday.get(3) != null}">
-                <td style="background: ${sunday.get(3).color};">${sunday.get(3).name}</td>
-            </c:when>
-            <c:otherwise>
-                <td class="bg-danger"></td>
-            </c:otherwise>
-        </c:choose>
-        <c:choose>
-            <c:when test="${monday.get(3) != null}">
-                <td style="background: ${monday.get(3).color};">${monday.get(3).name}</td>
-            </c:when>
-            <c:otherwise>
-                <td class="bg-danger"></td>
-            </c:otherwise>
-        </c:choose>
-        <c:choose>
-            <c:when test="${tuesday.get(3) != null}">
-                <td style="background: ${tuesday.get(3).color};">${tuesday.get(3).name}</td>
-            </c:when>
-            <c:otherwise>
-                <td class="bg-danger"></td>
-            </c:otherwise>
-        </c:choose>
-        <c:choose>
-            <c:when test="${wednesday.get(3) != null}">
-                <td style="background: ${wednesday.get(3).color};">${wednesday.get(3).name}</td>
-            </c:when>
-            <c:otherwise>
-                <td class="bg-danger"></td>
-            </c:otherwise>
-        </c:choose>
-        <c:choose>
-            <c:when test="${thursday.get(3) != null}">
-                <td style="background: ${thursday.get(3).color};">${thursday.get(3).name}</td>
-            </c:when>
-            <c:otherwise>
-                <td class="bg-danger"></td>
-            </c:otherwise>
-        </c:choose>
-        <c:choose>
-            <c:when test="${friday.get(3) != null}">
-                <td style="background: ${friday.get(3).color};">${friday.get(3).name}</td>
-            </c:when>
-            <c:otherwise>
-                <td class="bg-danger"></td>
-            </c:otherwise>
-        </c:choose>
-        <c:choose>
-            <c:when test="${saturday.get(3) != null}">
-                <td style="background: ${saturday.get(3).color};">${saturday.get(3).name}</td>
-            </c:when>
-            <c:otherwise>
-                <td class="bg-danger"></td>
-            </c:otherwise>
-        </c:choose>
+        <c:forEach items="${a_14_16}" var="a">
+            <c:choose>
+                <c:when test="${a != null}">
+                    <td style="background: ${a.color};">${a.name}</td>
+                </c:when>
+                <c:otherwise>
+                    <td class="bg-danger"></td>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
     </tr>
     </tbody>
 </table>
