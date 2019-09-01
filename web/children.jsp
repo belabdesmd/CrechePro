@@ -11,7 +11,7 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 </head>
 <body>
-<jsp:include page="navbar.html"/>
+<jsp:include page="navbar.jsp"/>
 <br/>
 <div class="container-fluid">
     <div class="row">
@@ -22,9 +22,16 @@
         </div>
         <div class="col-sm-10">
         </div>
-        <div class="col-sm-1" data-toggle="modal" data-target="#exampleModal">
-            <input class="btn btn-dark" type="submit" value="Create">
-        </div>
+        <%
+            if (session.getAttribute("username") != null)
+                out.print("<div class=\"col-sm-1\" data-toggle=\"modal\" data-target=\"#exampleModal\">" +
+                        "<input class=\"btn btn-dark\" type=\"submit\" value=\"Create\">" +
+                        "</div>");
+            else
+                out.print("<div class=\"col-sm-1\">" +
+                        "<input class=\"btn btn-dark\" type=\"submit\" value=\"Create\" disabled>" +
+                        "</div>");
+        %>
     </div>
 </div>
 
@@ -41,9 +48,7 @@
     </thead>
     <tbody>
     <%
-
         Parent parent;
-
 
         if (session.getAttribute("parent") == null) {
             System.out.println();

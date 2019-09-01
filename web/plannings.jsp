@@ -11,31 +11,33 @@
     <title>Plannings</title>
 </head>
 <body>
-<jsp:include page="navbar.html"/>
+<jsp:include page="navbar.jsp"/>
 <br/>
+<form id="filter">
+</form>
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-5">
-            <div class="form-group">
-                <label for="from">From</label>
-                <input type="date" class="form-control" id="from" name="from">
+    <form action="plannings.jsp">
+        <div class="row">
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <label for="from">From</label>
+                    <input type="date" class="form-control" id="from" name="start_date">
+                </div>
             </div>
-        </div>
-        <div class="col-sm-5">
-            <div class="form-group">
-                <label for="to">To</label>
-                <input type="date" class="form-control" id="to" name="to">
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <label for="to">To</label>
+                    <input type="date" class="form-control" id="to" name="end_date">
+                </div>
             </div>
-        </div>
-        <div class="col-sm-2">
-            <form action="addPlanning.jsp">
+            <div class="col-sm-2">
                 <div class="form-group">
                     <label><br/></label>
-                    <input class="form-control btn btn-dark" type="submit" value="Create">
+                    <input class="form-control btn btn-dark" type="submit" value="Filter">
                 </div>
-            </form>
+            </div>
         </div>
-    </div>
+    </form>
 </div>
 <br/>
 <%
@@ -132,5 +134,22 @@
     </tr>
     </tbody>
 </table>
+<div class="row">
+    <div class="col-sm-5"></div>
+    <div class="col-sm-5"></div>
+    <div class="col-sm-2">
+        <form action="addPlanning.jsp">
+            <div class="form-group">
+                <label><br/></label>
+                <%
+                    if (session.getAttribute("username") != null)
+                        out.print("<input class=\"btn btn-dark\" type=\"submit\" value=\"Create Planning\">");
+                    else
+                        out.print("<input class=\"btn btn-dark\" type=\"submit\" value=\"Create Planning\" disabled>");
+                %>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>

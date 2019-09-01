@@ -4,7 +4,7 @@
     <title>Employees</title>
 </head>
 <body>
-<jsp:include page="navbar.html"/>
+<jsp:include page="navbar.jsp"/>
 <% session.removeAttribute("parent"); %>
 
 <br/>
@@ -22,9 +22,16 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-1" data-toggle="modal" data-target="#exampleModal-1">
-            <input class="btn btn-dark" type="submit" value="Create">
-        </div>
+        <%
+            if (session.getAttribute("username") != null)
+                out.print("<div class=\"col-sm-1\" data-toggle=\"modal\" data-target=\"#exampleModal-1\">" +
+                        "<input class=\"btn btn-dark\" type=\"submit\" value=\"Create\">" +
+                        "</div>");
+            else
+                out.print("<div class=\"col-sm-1\">" +
+                        "<input class=\"btn btn-dark\" type=\"submit\" value=\"Create\" disabled>" +
+                        "</div>");
+        %>
     </div>
 </div>
 <br/>

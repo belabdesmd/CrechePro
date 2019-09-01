@@ -9,8 +9,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PlanningDAO {
+
+    private static String[] WEEK = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
 
     public static void createPlanning(Connection connection, String start_date, String end_date) {
         try {
@@ -31,6 +35,8 @@ public class PlanningDAO {
         Planning planning = new Planning();
 
         try {
+            System.out.println(start_date);
+            System.out.println(end_date);
             PreparedStatement ps = connection.prepareStatement("select id from planning where start_date <= ? and end_date >= ?");
 
             SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -320,7 +326,7 @@ public class PlanningDAO {
         int id = 0;
         createPlanning(connection, start_date, end_date);
         try {
-            PreparedStatement getId = connection.prepareStatement("select id from planning where start_date == ? and end_date == ?");
+            PreparedStatement getId = connection.prepareStatement("select id from planning where start_date = ? and end_date = ?");
             SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
             java.util.Date start = sdf1.parse(start_date);
             java.util.Date end = sdf1.parse(end_date);
@@ -337,5 +343,91 @@ public class PlanningDAO {
             e.printStackTrace();
         }
         return id;
+    }
+
+    public static List<Activity> getActivities(Connection connection) {
+        List<Activity> activities = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement("select name from activity");
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Activity activity = new Activity();
+                activity.setName(rs.getString("name"));
+                activities.add(activity);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return activities;
+    }
+
+
+    public static int getActivityId(Connection connection, String activities) {
+        int id = 0;
+
+        try {
+            PreparedStatement ps = connection.prepareStatement("select id from activity where name = ?");
+            ps.setString(1, activities);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                id = rs.getInt("id");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
+    public static int getActivityId(Connection connection, String name, String description, String color) {
+        int id = 0;
+
+        try {
+            PreparedStatement ps = connection.prepareStatement("insert into activity(name, description, color) values(?,?,?)");
+            ps.setString(1, name);
+            ps.setString(2, description);
+            ps.setString(3, color);
+
+            int status = ps.executeUpdate();
+
+            id = getActivityId(connection, name);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return id;
+    }
+
+    public static void linkActivity(Connection connection, String planning_id, int activity_id, String day, String time) {
+        //Init Vars
+        int planningId = -1;
+        String week_day = "";
+        System.out.println(day);
+        try {
+            planningId = Integer.valueOf(planning_id);
+            week_day = WEEK[Integer.valueOf(day)];
+            System.out.println(week_day);
+        }catch (NumberFormatException e){
+            //Ignore
+        }
+
+        try {
+            PreparedStatement ps = connection.prepareStatement("insert into planning_activity values(?,?,?,?)");
+            ps.setString(1,week_day);
+            ps.setString(2,time);
+            ps.setInt(3,planningId);
+            ps.setInt(4,activity_id);
+
+            int status = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

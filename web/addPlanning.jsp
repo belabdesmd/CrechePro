@@ -4,7 +4,7 @@
     <title>Create Planning</title>
 </head>
 <body>
-<jsp:include page="navbar.html"/>
+<jsp:include page="navbar.jsp"/>
 <br/>
 <form action="addActivities.jsp">
     <div class="modal-body">

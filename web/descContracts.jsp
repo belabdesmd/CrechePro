@@ -35,7 +35,13 @@
                     <input type="hidden" name="contractId" value="${e.getChild().getId()}">
                 </form>
                 <form action="deleteContract.jsp" method="get">
-                    <input class="delete btn btn-danger" type="submit" value="Delete">
+                    <%
+                        if (session.getAttribute("username") != null)
+                            out.print("<input class=\"delete btn btn-danger\" type=\"submit\" value=\"Delete\">");
+                        else
+                            out.print("<input class=\"delete btn btn-danger\" type=\"submit\" value=\"Delete\" disabled>");
+                    %>
+
                     <input type="hidden" name="id" value="${e.id}">
                 </form>
             </td>

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,6 +26,14 @@
             <li class="nav-item">
                 <a class="nav-link" href="employees.jsp">Employees</a>
             </li>
+
+            <%
+                if (session.getAttribute("username") != null)
+                    out.print("<li class=\"nav-item\"><a class=\"nav-link\" href=\"logout.jsp?next=index.jsp\">logout</a></li>");
+                else
+                    out.print("<li class=\"nav-item\"><a class=\"nav-link\" href=\"loginForm.jsp?next=index.jsp\">login</a></li>");
+            %>
+
         </ul>
     </div>
 </nav>
