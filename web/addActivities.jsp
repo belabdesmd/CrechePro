@@ -18,6 +18,9 @@
     </style>
 </head>
 <body>
+<%
+    session.setAttribute("current", "plannings");
+%>
 <jsp:include page="navbar.jsp"/>
 <br/>
 <%

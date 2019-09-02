@@ -4,6 +4,9 @@
     <title>Create Planning</title>
 </head>
 <body>
+<%
+    session.setAttribute("current", "plannings");
+%>
 <jsp:include page="navbar.jsp"/>
 <br/>
 <form action="addActivities.jsp">

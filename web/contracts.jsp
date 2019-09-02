@@ -5,8 +5,11 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 </head>
 <body>
+<%
+    session.setAttribute("current", "contracts");
+    session.removeAttribute("parent");
+%>
 <jsp:include page="navbar.jsp"/>
-<% session.removeAttribute("parent"); %>
 <br/>
 <div class="container-fluid">
     <div class="row">
@@ -16,7 +19,7 @@
                         data-display="static" aria-haspopup="true" aria-expanded="false" style="text-align: start;">
                     Filter
                 </button>
-                <div class="dropdown-menu dropdown-menu-lg-right">
+                <div class="dropdown-menu dropdown-menu-lg-right" style="width: 100%;">
                     <button class="dropdown-item" type="button" onclick="filterDisabled()">Disabled Contracts</button>
                     <button class="dropdown-item" type="button" onclick="filterASC()">Sort Contracts (ASC)</button>
                     <button class="dropdown-item" type="button" onclick="filterDESC()">Sort Contracts (DESC)</button>

@@ -8,6 +8,9 @@
 <head>
     <title>Create Activity</title>
 </head>
+<%
+    session.setAttribute("current", "plannings");
+%>
 <jsp:include page="navbar.jsp"/>
 <br/>
 <%

@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class EmployeeDAO {
@@ -56,6 +57,9 @@ public class EmployeeDAO {
             e.printStackTrace();
         }
 
+        if(asc)
+            Collections.reverse(list);
+
         return list;
     }
 
@@ -67,5 +71,31 @@ public class EmployeeDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static Employee getEmployee(Connection connection, Integer employeeId) {
+        Employee employee = new Employee();
+
+        try {
+            PreparedStatement ps = connection.prepareStatement("select * from employee where id = ?");
+            ps.setInt(1, employeeId);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                employee.setId(rs.getInt("id"));
+                employee.setFirst_name(rs.getString("first_name"));
+                employee.setLast_name(rs.getString("last_name"));
+                employee.setGender(rs.getString("gender"));
+                employee.setBirthday(rs.getString("birthday"));
+                employee.setEmail(rs.getString("email"));
+                employee.setAddress(rs.getString("address"));
+                employee.setPhone(rs.getInt("phone"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return employee;
     }
 }

@@ -4,6 +4,9 @@
     <title>Employees</title>
 </head>
 <body>
+<%
+    session.setAttribute("current", "employees");
+%>
 <jsp:include page="navbar.jsp"/>
 <br/>
 <div class="container-fluid">
@@ -14,7 +17,7 @@
                         data-display="static" aria-haspopup="true" aria-expanded="false" style="text-align: start;">
                     Filter
                 </button>
-                <div class="dropdown-menu dropdown-menu-lg-right">
+                <div class="dropdown-menu dropdown-menu-lg-right" style="width: 100%;">
                     <button class="dropdown-item" type="button" onclick="filterASC()">Sort Employees (ASC)</button>
                     <button class="dropdown-item" type="button" onclick="filterDESC()">Sort Employees (DESC)</button>
                 </div>
