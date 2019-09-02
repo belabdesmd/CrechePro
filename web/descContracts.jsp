@@ -3,7 +3,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.crechepro.dao.ContractDAO" %>
 <%@ page import="com.crechepro.utils.DBHelper" %>
-<%@ page import="com.crechepro.utils.PDFUtils" %>
 <table class="table table-hover">
     <thead>
     <tr>
@@ -20,19 +19,25 @@
     <%
         List<Contract> contracts = ContractDAO.getContracts(DBHelper.getConnection(), false, false);
         request.setAttribute("contracts", contracts);
+        request.setAttribute("count", contracts.size());
     %>
+    <c:if test="${count == 0}">
+        <tr>
+            <td rowspan="7">No Contracts</td>
+        </tr>
+    </c:if>
     <c:forEach items="${contracts}" var="e">
         <tr>
             <td></td>
-            <th scope="row">${e.getId()}</th>
-            <td>${e.getChild().getFirst_name()}</td>
-            <td>${e.getChild().getLast_name()}</td>
-            <td>${e.getBegin_date()}</td>
-            <td>${e.getEnd_date()}</td>
+            <th scope="row">${e.id}</th>
+            <td>${e.child.first_name}</td>
+            <td>${e.child.first_name}</td>
+            <td>${e.begin_date}</td>
+            <td>${e.end_date}</td>
             <td>
                 <form action="viewContract.jsp" method="get">
                     <input class="view btn btn-dark" type="submit" value="View">
-                    <input type="hidden" name="contractId" value="${e.getChild().getId()}">
+                    <input type="hidden" name="contractId" value="${e.child.id}">
                 </form>
                 <form action="deleteContract.jsp" method="get">
                     <%

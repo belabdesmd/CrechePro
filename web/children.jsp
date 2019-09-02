@@ -4,7 +4,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.crechepro.dao.ChildDAO" %>
 <%@ page import="com.crechepro.bean.Parent" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Add Children</title>
@@ -50,8 +50,8 @@
     <%
         Parent parent;
 
+        //Get Praent
         if (session.getAttribute("parent") == null) {
-            System.out.println();
             parent = new Parent();
             parent.setStatus(request.getParameter("status"));
             parent.setFirst_name(request.getParameter("first_name"));
@@ -65,15 +65,24 @@
             parent.setAddress(request.getParameter("address"));
             parent.setId(ParentDAO.getParentId(DBHelper.getConnection(), parent.getStatus(), parent.getFirst_name()
                     , parent.getLast_name(), parent.getEmail(), parent.getAddress(), parent.getPhone()));
-        }
-        else parent = ((Parent) session.getAttribute("parent"));
+        } else parent = ((Parent) session.getAttribute("parent"));
 
+        //Set Parent
         session.setAttribute("parent", parent);
 
+        //Get Parent's Children
         List<Child> children = ChildDAO.getChildren(DBHelper.getConnection(), parent.getId());
+
+        //SEt Attributes
         request.setAttribute("children", children);
+        request.setAttribute("count", children.size());
         request.setAttribute("parentId", parent.getId());
     %>
+    <c:if test="${count == 0}">
+        <tr>
+            <td rowspan="6">No Children</td>
+        </tr>
+    </c:if>
     <c:forEach items="${children}" var="e">
         <tr>
             <td></td>
@@ -89,17 +98,17 @@
 </table>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="createChildModal" tabindex="-1" role="dialog" aria-labelledby="createChildModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Create Contract</h5>
+                <h5 class="modal-title" id="createChildModalLabel">Create Contract</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="createChild.jsp">
+            <form action="createContract.jsp">
                 <input type="hidden" name="parentId" value="${parentId}">
                 <div class="modal-body">
                     <div class="form-group">

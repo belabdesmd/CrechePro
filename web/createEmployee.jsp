@@ -1,14 +1,13 @@
 =
-<%@ page import="org.apache.commons.fileupload.disk.DiskFileItemFactory" %>
-<%@ page import="org.apache.commons.fileupload.servlet.ServletFileUpload" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.Iterator" %>
-<%@ page import="org.apache.commons.fileupload.FileItem" %>
-<%@ page import="java.io.File" %>
 <%@ page import="com.crechepro.bean.Employee" %>
 <%@ page import="com.crechepro.dao.EmployeeDAO" %>
 <%@ page import="com.crechepro.utils.DBHelper" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="org.apache.commons.fileupload.FileItem" %>
+<%@ page import="org.apache.commons.fileupload.disk.DiskFileItemFactory" %>
+<%@ page import="org.apache.commons.fileupload.servlet.ServletFileUpload" %>
+<%@ page import="java.io.File" %>
+<%@ page import="java.util.List" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 
 <%
     File file;
@@ -48,8 +47,6 @@
                 if (!fi.isFormField()) {
                     // Get the uploaded file parameters
                     String fileName = employee.getFirst_name() + "_" + employee.getLast_name() + ".jpeg";
-                    boolean isInMemory = fi.isInMemory();
-                    long sizeInBytes = fi.getSize();
 
                     // Write the file
                     if (fileName.lastIndexOf("\\") >= 0) {
@@ -96,7 +93,7 @@
             response.sendRedirect("employees.jsp");
 
         } catch (Exception ex) {
-            System.out.println(ex);
+            ex.printStackTrace();
         }
     }
 %>

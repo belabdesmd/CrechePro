@@ -20,7 +20,13 @@
     <%
         List<Employee> employees = EmployeeDAO.getEmployees(DBHelper.getConnection(), false);
         request.setAttribute("employees", employees);
+        request.setAttribute("count", employees.size());
     %>
+    <c:if test="${count == 0}">
+        <tr>
+            <td rowspan="8">No Employees</td>
+        </tr>
+    </c:if>
     <c:forEach items="${employees}" var="e">
         <tr>
             <td></td>

@@ -5,7 +5,7 @@
 <%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.text.DateFormat" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Plannings</title>
@@ -136,7 +136,6 @@
 </table>
 <div class="row">
     <div class="col-sm-5"></div>
-    <div class="col-sm-5"></div>
     <div class="col-sm-2">
         <form action="addPlanning.jsp">
             <div class="form-group">
@@ -150,6 +149,7 @@
             </div>
         </form>
     </div>
+    <div class="col-sm-5"></div>
 </div>
 </body>
 </html>

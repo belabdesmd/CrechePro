@@ -1,12 +1,10 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Employees</title>
 </head>
 <body>
 <jsp:include page="navbar.jsp"/>
-<% session.removeAttribute("parent"); %>
-
 <br/>
 <div class="container-fluid">
     <div class="row">
@@ -40,12 +38,12 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal-1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="employeeModal" tabindex="-1" role="dialog" aria-labelledby="employeeModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Create Contract</h5>
+                <h5 class="modal-title" id="employeeModalLabel">Create Employee</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -60,10 +58,10 @@
                         <label for="last_name">Last Name</label>
                         <input type="text" class="form-control" id="last_name" name="last_name">
                     </div>
-                    <div class="form-group">
-                        <label for="profile_picture">Profile Picture</label>
-                        <input type="file" class="form-control" id="profile_picture" name="profile_picture">
-                    </div>
+                    <%--                    <div class="form-group">--%>
+                    <%--                        <label for="profile_picture">Profile Picture</label>--%>
+                    <input type="file" class="form-control" id="profile_picture" name="profile_picture">
+                    <%--                    </div>--%>
                     <div class="form-group">
                         <label for="gender">Gender</label>
                         <select class="form-control" id="gender" name="gender">

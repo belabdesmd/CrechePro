@@ -1,7 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Create Admin</title>
+    <title>Admins</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
@@ -9,7 +9,7 @@
 <%
     if (request.getParameter("first") != null && !request.getParameter("first").equals("true"))
         if (session.getAttribute("username") == null)
-            response.sendRedirect("loginForm.jsp?next=firstAdmin.jsp");
+            response.sendRedirect("loginForm.jsp?next=admins.jsp");
 %>
 <form action="createAdmin.jsp">
     <div class="modal-body">

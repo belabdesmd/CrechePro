@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Contracts</title>
@@ -24,6 +24,7 @@
             </div>
         </div>
         <%
+            //Check if Admoin Logged, if so Enable Create Contract option
             if (session.getAttribute("username") != null)
                 out.print("<div class=\"col-sm-1\" data-toggle=\"modal\" data-target=\"#exampleModal\">" +
                         "<input class=\"btn btn-dark\" type=\"submit\" value=\"Create\">" +
@@ -39,13 +40,15 @@
 <div class="contracts">
     <jsp:include page="descContracts.jsp"/>
 </div>
+
+
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="parentInfoModal" tabindex="-1" role="dialog" aria-labelledby="parentInfoModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Create Contract</h5>
+                <h5 class="modal-title" id="parentInfoModalLabel">Create Contract</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -89,6 +92,7 @@
         </div>
     </div>
 </div>
+
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script>
     function filterDisabled() {
