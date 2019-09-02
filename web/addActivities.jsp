@@ -6,6 +6,16 @@
 <html>
 <head>
     <title>Add Activities</title>
+    <style>
+        table,
+        thead,
+        tr,
+        tbody,
+        th,
+        td {
+            color: #FFFFFF;
+        }
+    </style>
 </head>
 <body>
 <jsp:include page="navbar.jsp"/>

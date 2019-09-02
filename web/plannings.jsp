@@ -9,6 +9,16 @@
 <html>
 <head>
     <title>Plannings</title>
+    <style>
+        table,
+        thead,
+        tr,
+        tbody,
+        th,
+        td {
+            color: #FFFFFF;
+        }
+    </style>
 </head>
 <body>
 <jsp:include page="navbar.jsp"/>
@@ -66,7 +76,7 @@
     request.setAttribute("a_12_14", planning.getActivities_12_14());
     request.setAttribute("a_14_16", planning.getActivities_14_16());
 %>
-<table class="table table-dark">
+<table class="table">
     <thead>
     <tr>
         <th scope="col" class="bg-success">#</th>

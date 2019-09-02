@@ -3,11 +3,12 @@
 <%@ page import="com.crechepro.bean.Employee" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.crechepro.dao.EmployeeDAO" %>
+<%@ page import="com.crechepro.dao.AdminDAO" %>
 <table class="table table-hover">
     <thead>
     <tr>
-        <th></th>
         <th scope="col">#</th>
+        <th scope="col">State</th>
         <th scope="col">First Name</th>
         <th scope="col">Last Name</th>
         <th scope="col">Birthday</th>
@@ -24,13 +25,20 @@
     %>
     <c:if test="${count == 0}">
         <tr>
-            <td rowspan="8">No Employees</td>
+            <td colspan="7">No Employees</td>
         </tr>
     </c:if>
     <c:forEach items="${employees}" var="e">
         <tr>
-            <td></td>
             <th scope="row">${e.id}</th>
+            <th>
+                <%
+                    if (AdminDAO.isAdmin(DBHelper.getConnection(), ((Employee)(pageContext.findAttribute("e"))).getId()))
+                        out.println("<span class=\"badge badge-success\">Admin</span>\n");
+                    else
+                        out.println("<span class=\"badge badge-dark\">Employee</span>\n");
+                %>
+            </th>
             <td>${e.first_name}</td>
             <td>${e.last_name}</td>
             <td>${e.birthday}</td>

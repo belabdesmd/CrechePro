@@ -70,4 +70,22 @@ public class AdminDAO {
 
         return logged;
     }
+
+    public static boolean isAdmin(Connection connection, int id) {
+        boolean exists = false;
+
+        try {
+            PreparedStatement ps = connection.prepareStatement("select * from admin where employee_id = ?");
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) exists = true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return exists;
+    }
 }

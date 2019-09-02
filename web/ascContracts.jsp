@@ -6,7 +6,6 @@
 <table class="table table-hover">
     <thead>
     <tr>
-        <th></th>
         <th scope="col">#</th>
         <th scope="col">First Name</th>
         <th scope="col">Last Name</th>
@@ -23,12 +22,11 @@
     %>
     <c:if test="${count == 0}">
         <tr>
-            <td rowspan="7">No Contracts</td>
+            <td colspan="6">No Contracts</td>
         </tr>
     </c:if>
     <c:forEach items="${contracts}" var="e">
         <tr>
-            <td></td>
             <th scope="row">${e.id}</th>
             <td>${e.child.first_name}</td>
             <td>${e.child.last_name}</td>

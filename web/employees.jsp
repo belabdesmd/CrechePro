@@ -22,7 +22,7 @@
         </div>
         <%
             if (session.getAttribute("username") != null)
-                out.print("<div class=\"col-sm-1\" data-toggle=\"modal\" data-target=\"#exampleModal-1\">" +
+                out.print("<div class=\"col-sm-1\" data-toggle=\"modal\" data-target=\"#employeeModal\">" +
                         "<input class=\"btn btn-dark\" type=\"submit\" value=\"Create\">" +
                         "</div>");
             else
@@ -58,10 +58,10 @@
                         <label for="last_name">Last Name</label>
                         <input type="text" class="form-control" id="last_name" name="last_name">
                     </div>
-                    <%--                    <div class="form-group">--%>
-                    <%--                        <label for="profile_picture">Profile Picture</label>--%>
-                    <input type="file" class="form-control" id="profile_picture" name="profile_picture">
-                    <%--                    </div>--%>
+                    <div class="form-group">
+                        <label for="profile_picture">Profile Picture</label>
+                        <input type="file" class="form-control" id="profile_picture" name="profile_picture">
+                    </div>
                     <div class="form-group">
                         <label for="gender">Gender</label>
                         <select class="form-control" id="gender" name="gender">

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style/css/main.css"/>
 </head>
 <body>
 
@@ -26,15 +27,14 @@
             <li class="nav-item">
                 <a class="nav-link" href="employees.jsp">Employees</a>
             </li>
-
-            <%
-                if (session.getAttribute("username") != null)
-                    out.print("<li class=\"nav-item\"><a class=\"nav-link\" href=\"logout.jsp?next=index.jsp\">logout</a></li>");
-                else
-                    out.print("<li class=\"nav-item\"><a class=\"nav-link\" href=\"loginForm.jsp?next=index.jsp\">login</a></li>");
-            %>
-
         </ul>
+        <%
+            if (session.getAttribute("username") != null)
+                out.print("<a style=\"color: #FFF;\" class=\"nav-link\" href=\"logout.jsp?next=index.jsp\">logout</a>" +
+                        "<a style=\"color: #FFF;\" class=\"nav-link\" href=\"admins.jsp?first=false\">Add Admin</a>");
+            else
+                out.print("<a style=\"color: #FFF;\" class=\"nav-link\" href=\"loginForm.jsp?next=index.jsp\">login</a>");
+        %>
     </div>
 </nav>
 

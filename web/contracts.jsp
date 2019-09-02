@@ -26,7 +26,7 @@
         <%
             //Check if Admoin Logged, if so Enable Create Contract option
             if (session.getAttribute("username") != null)
-                out.print("<div class=\"col-sm-1\" data-toggle=\"modal\" data-target=\"#exampleModal\">" +
+                out.print("<div class=\"col-sm-1\" data-toggle=\"modal\" data-target=\"#parentInfoModal\">" +
                         "<input class=\"btn btn-dark\" type=\"submit\" value=\"Create\">" +
                         "</div>");
             else

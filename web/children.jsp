@@ -24,7 +24,7 @@
         </div>
         <%
             if (session.getAttribute("username") != null)
-                out.print("<div class=\"col-sm-1\" data-toggle=\"modal\" data-target=\"#exampleModal\">" +
+                out.print("<div class=\"col-sm-1\" data-toggle=\"modal\" data-target=\"#createChildModal\">" +
                         "<input class=\"btn btn-dark\" type=\"submit\" value=\"Create\">" +
                         "</div>");
             else
@@ -38,7 +38,6 @@
 <table class="table table-hover">
     <thead>
     <tr>
-        <th></th>
         <th scope="col">#</th>
         <th scope="col">First Name</th>
         <th scope="col">Last Name</th>
@@ -80,12 +79,11 @@
     %>
     <c:if test="${count == 0}">
         <tr>
-            <td rowspan="6">No Children</td>
+            <td colspan="5">No Children</td>
         </tr>
     </c:if>
     <c:forEach items="${children}" var="e">
         <tr>
-            <td></td>
             <th scope="row">${e.id}</th>
             <td>${e.first_name}</td>
             <td>${e.last_name}</td>
