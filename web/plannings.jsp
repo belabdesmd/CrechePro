@@ -98,7 +98,8 @@
         <c:forEach items="${a_8_10}" var="a">
             <c:choose>
                 <c:when test="${a != null}">
-                    <td style="background: ${a.color};">${a.name}</td>
+                    <td style="background: ${a.color};" data-toggle="tooltip" data-placement="bottom"
+                        title="${a.description}">${a.name}</td>
                 </c:when>
                 <c:otherwise>
                     <td class="bg-danger"></td>
@@ -111,7 +112,8 @@
         <c:forEach items="${a_10_12}" var="a">
             <c:choose>
                 <c:when test="${a != null}">
-                    <td style="background: ${a.color};">${a.name}</td>
+                    <td style="background: ${a.color};" data-toggle="tooltip" data-placement="bottom"
+                        title="${a.description}">${a.name}</td>
                 </c:when>
                 <c:otherwise>
                     <td class="bg-danger"></td>
@@ -124,7 +126,8 @@
         <c:forEach items="${a_12_14}" var="a">
             <c:choose>
                 <c:when test="${a != null}">
-                    <td style="background: ${a.color};">${a.name}</td>
+                    <td style="background: ${a.color};" data-toggle="tooltip" data-placement="bottom"
+                        title="${a.description}">${a.name}</td>
                 </c:when>
                 <c:otherwise>
                     <td class="bg-danger"></td>
@@ -137,7 +140,8 @@
         <c:forEach items="${a_14_16}" var="a">
             <c:choose>
                 <c:when test="${a != null}">
-                    <td style="background: ${a.color};">${a.name}</td>
+                    <td style="background: ${a.color};" data-toggle="tooltip" data-placement="bottom"
+                        title="${a.description}">${a.name}</td>
                 </c:when>
                 <c:otherwise>
                     <td class="bg-danger"></td>

@@ -105,12 +105,6 @@
         %>
     </div>
 </div>
-<div class="container" style="margin: 0 auto;">
-    <div class="row">
-        <div class="col-sm-4"></div>
-
-    </div>
-</div>
 <table class="table table-hover">
     <thead>
     <tr>

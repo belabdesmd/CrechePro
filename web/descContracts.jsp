@@ -29,7 +29,7 @@
         <tr>
             <th scope="row">${e.id}</th>
             <td>${e.child.first_name}</td>
-            <td>${e.child.first_name}</td>
+            <td>${e.child.last_name}</td>
             <td>${e.begin_date}</td>
             <td>${e.end_date}</td>
             <td>

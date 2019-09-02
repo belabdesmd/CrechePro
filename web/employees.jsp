@@ -51,7 +51,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="createEmployee.jsp" method="post" enctype="multipart/form-data">
+            <form action="pages/employees/createEmployee.jsp" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="first_name">First Name</label>

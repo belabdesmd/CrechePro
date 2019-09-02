@@ -79,7 +79,8 @@
                             break;
                         case "phone":
                             try {
-                                employee.setPhone(Integer.valueOf(fi.getString()));
+                                int phone = Integer.valueOf(fi.getString());
+                                employee.setPhone(phone);
                             } catch (NumberFormatException e) {
                                 //Ignore
                             }

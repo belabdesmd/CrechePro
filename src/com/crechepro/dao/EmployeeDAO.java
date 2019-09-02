@@ -57,8 +57,7 @@ public class EmployeeDAO {
             e.printStackTrace();
         }
 
-        if(asc)
-            Collections.reverse(list);
+        if(asc) Collections.reverse(list);
 
         return list;
     }
