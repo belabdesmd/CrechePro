@@ -3,6 +3,10 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.crechepro.dao.ContractDAO" %>
 <%@ page import="com.crechepro.utils.DBHelper" %>
+<%@ page import="java.text.DateFormat" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.text.ParseException" %>
 <table class="table table-hover">
     <thead>
     <tr>
@@ -17,6 +21,21 @@
     <tbody>
     <%
         List<Contract> contracts = ContractDAO.getContracts(DBHelper.getConnection(), false, false);
+
+        //Set Disabled Contracts:
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+
+        for (Contract contract :
+                contracts) {
+            try {
+                if (date.compareTo(dateFormat.parse(contract.getEnd_date())) > 0)
+                    ContractDAO.disableContract(DBHelper.getConnection(), contract.getId());
+            } catch (java.text.ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
         request.setAttribute("contracts", contracts);
         request.setAttribute("count", contracts.size());
     %>

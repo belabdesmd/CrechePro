@@ -8,7 +8,11 @@ import com.crechepro.utils.PDFUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -29,7 +33,7 @@ public class ContractDAO {
 
 
             Contract contract = new Contract();
-            while(rs.next()){
+            while (rs.next()) {
                 contract.setBegin_date(rs.getDate("start_date").toString());
                 contract.setEnd_date(rs.getDate("end_date").toString());
                 contract.setChild(child);
@@ -140,5 +144,35 @@ public class ContractDAO {
             System.out.println(e);
         }
         return list;
+    }
+
+    public static void disableContract(Connection connection, int id) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("UPDATE contract SET disabled = 1 WHERE id = ?;");
+            ps.setInt(1, id);
+            int status = ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void renewContract(Connection connection, int id){
+        try {
+            Calendar c = Calendar.getInstance();
+            Date date = new Date();
+            c.setTime(date);
+            c.add(Calendar.YEAR, 1);
+
+            Date newDate = c.getTime();
+
+            PreparedStatement ps = connection.prepareStatement("UPDATE contract SET start_date = ?, end_date = ?, disabled = 0 WHERE id = ?;");
+            ps.setDate(1, new java.sql.Date(date.getTime()));
+            ps.setDate(2, new java.sql.Date(newDate.getTime()));
+            ps.setInt(3, id);
+            int status = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

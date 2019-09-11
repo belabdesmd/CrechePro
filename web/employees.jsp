@@ -51,7 +51,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="pages/employees/createEmployee.jsp" method="post" enctype="multipart/form-data">
+            <form action="createEmployee.jsp" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="first_name">First Name</label>
@@ -91,7 +91,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <input type="submit" class="btn btn-primary" value="Add Employee"/>
+                        <input type="submit" class="btn btn-success" value="Add Employee"/>
                     </div>
                 </div>
             </form>

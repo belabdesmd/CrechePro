@@ -38,7 +38,7 @@
         <input type="hidden" name="time" value="${time}">
         <input type="hidden" name="day" value="${day}">
         <div class="modal-footer">
-            <input type="submit" class="btn btn-primary" value="Create Activity"/>
+            <input type="submit" class="btn btn-success" value="Create Activity"/>
         </div>
     </div>
 </form>

@@ -143,7 +143,7 @@
 <form action="plannings.jsp">
     <div class="modal-body">
         <div class="modal-footer">
-            <input type="submit" class="btn btn-primary" value="Finish"/>
+            <input type="submit" class="btn btn-success" value="Finish"/>
         </div>
     </div>
 </form>

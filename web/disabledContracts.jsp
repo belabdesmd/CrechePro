@@ -33,9 +33,9 @@
             <td>${e.begin_date}</td>
             <td>${e.end_date}</td>
             <td>
-                <form action="viewContract.jsp" method="get">
-                    <input class="view btn btn-dark" type="submit" value="View">
-                    <input type="hidden" name="contractId" value="${e.child.id}">
+                <form action="renewContract.jsp" method="get">
+                    <input class="view btn btn-warning" type="submit" value="Renew">
+                    <input type="hidden" name="contractId" value="${e.id}">
                 </form>
                 <form action="deleteContract.jsp" method="get">
                     <%

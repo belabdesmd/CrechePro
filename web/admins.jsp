@@ -54,7 +54,7 @@
             <input type="number" class="form-control" id="phone" name="phone">
         </div>
         <div class="modal-footer">
-            <input type="submit" class="btn btn-primary" value="Add Admin"/>
+            <input type="submit" class="btn btn-success" value="Add Admin"/>
         </div>
     </div>
 </form>

@@ -88,7 +88,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <input type="submit" class="btn btn-primary" value="Add Children"/>
+                        <input type="submit" class="btn btn-success" value="Add Children"/>
                     </div>
                 </div>
             </form>

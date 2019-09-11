@@ -169,7 +169,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <input type="submit" class="btn btn-primary" value="Add Child"/>
+                        <input type="submit" class="btn btn-success" value="Add Child"/>
                     </div>
                 </div>
             </form>

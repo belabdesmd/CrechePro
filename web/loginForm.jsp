@@ -14,7 +14,7 @@
                 "</div>");
 %>
 <form action="loginProcess.jsp">
-    <div class="modal-body">
+    <div class="modal-body" style="width: 50%; margin: 100px auto;">
         <input type="hidden" name="next" value="${next}">
         <div class="form-group">
             <label for="username">Username</label>
@@ -25,7 +25,7 @@
             <input type="password" class="form-control" id="password" name="password">
         </div>
         <div class="modal-footer">
-            <input type="submit" class="btn btn-primary" value="Login"/>
+            <input type="submit" class="btn btn-success" value="Login"/>
         </div>
     </div>
 </form>
