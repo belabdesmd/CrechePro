@@ -1,4 +1,4 @@
-# CrechePro
+# CrechePro [Finished]
 
 <h2>Setup:</h2>
 
