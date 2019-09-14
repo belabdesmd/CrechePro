@@ -96,7 +96,7 @@
     </div>
 </div>
 
-<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="style/js/jquery.js"></script>
 <script>
     function filterDisabled() {
         $(".contracts").load("disabledContracts.jsp");

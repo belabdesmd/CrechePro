@@ -20,7 +20,7 @@
             <input type="date" class="form-control" id="to" name="to">
         </div>
         <div class="modal-footer">
-            <input type="submit" class="btn btn-syccess" value="Next"/>
+            <input type="submit" class="btn btn-success" value="Next"/>
         </div>
     </div>
 </form>

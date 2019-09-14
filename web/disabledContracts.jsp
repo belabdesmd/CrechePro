@@ -34,7 +34,12 @@
             <td>${e.end_date}</td>
             <td>
                 <form action="renewContract.jsp" method="get">
-                    <input class="view btn btn-warning" type="submit" value="Renew">
+                    <%
+                        if (session.getAttribute("username") != null)
+                            out.print("<input class=\"delete btn btn-warning\" type=\"submit\" value=\"Renew\">");
+                        else
+                            out.print("<input class=\"delete btn btn-warning\" type=\"submit\" value=\"Renew\" disabled>");
+                    %>
                     <input type="hidden" name="contractId" value="${e.id}">
                 </form>
                 <form action="deleteContract.jsp" method="get">
